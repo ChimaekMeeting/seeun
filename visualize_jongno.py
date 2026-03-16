@@ -15,7 +15,6 @@ def visualize():
     # 1. geometry 복원
     df['geometry'] = df['geom'].apply(lambda x: wkb.loads(bytes(x)))
     
-    # 🌟 [중요] 에러 해결을 위해 쓰고 남은 이진 데이터(geom) 컬럼을 삭제합니다!
     df.drop(columns=['geom'], inplace=True) 
     
     gdf = gpd.GeoDataFrame(df, geometry='geometry', crs="EPSG:4326")
