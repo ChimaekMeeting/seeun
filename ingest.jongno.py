@@ -21,7 +21,7 @@ def create_jongno_grid():
     outer_coords = [(lat, lng) for lng, lat in boundary.exterior.coords]
     h3_poly = h3.LatLngPoly(outer_coords) # H3 내부 연산을 위한 다각형 객체 생성
     
-    # 해상도 12 설정: 한 변의 길이가 약 10m 내외인 아주 세밀한 격자 (졸업작품 수준의 정밀도)
+    # 해상도 12 설정: 한 변의 길이가 약 10m 내외인 아주 세밀한 격자
     print("⬢ 종로구 육각형 격자 생성 중 (Res 12)...")
     hexs = list(h3.polygon_to_cells(h3_poly, 12)) 
     print(f"📊 생성된 육각형 수: {len(hexs)}개")
@@ -53,7 +53,6 @@ def create_jongno_grid():
                 ON CONFLICT (hex_id) DO NOTHING
             """), data_list)
             
-            # 대량 작업 시 사용자에게 진행 상황 공유
             if i % 10000 == 0:
                 print(f" 진행률: {i}/{len(hexs)} 완료...")
         
